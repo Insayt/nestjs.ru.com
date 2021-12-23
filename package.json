@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "description": "test",
   "main": "index.js",
-  "homepage": "https://github.com/Insayt/nestjs.ru.com/nestjs.ru.com",
   "authors": {
     "name": "Alex Insayt",
     "email": "mr.insayt@gmail.com"
