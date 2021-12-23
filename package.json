@@ -1,0 +1,23 @@
+{
+  "name": "nestjs.ru.com",
+  "version": "0.0.1",
+  "description": "test",
+  "main": "index.js",
+  "authors": {
+    "name": "Alex Insayt",
+    "email": "mr.insayt@gmail.com"
+  },
+  "repository": "https://github.com/Insayt/nestjs.ru.com/nestjs.ru.com",
+  "scripts": {
+    "dev": "vuepress dev src",
+    "build": "vuepress build src"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^1.5.3",
+    "vuepress-theme-dark": "^0.1.0"
+  },
+  "dependencies": {
+    "vuepress-theme-default-prefers-color-scheme": "^2.0.0"
+  }
+}
