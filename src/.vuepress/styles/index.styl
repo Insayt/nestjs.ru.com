@@ -5,4 +5,58 @@
  */
 
 .home .hero img
-  max-width 450px!important
+  max-width 450px !important
+
+.home .hero .description
+  font-size 20px !important
+  margin-top 15px !important
+
+.home .hero h1
+  margin-bottom 15px !important
+
+.file-tree {
+  background: #282c34;
+  margin: 40px 0;
+  padding: 16px 32px;
+}
+
+.file-tree .item {
+  display: block;
+  line-height: 32px;
+  font-size: 15px;
+  color: white;
+}
+
+.file-tree .children {
+  padding-left: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+
+.file-tree .children .item {
+  position: relative;
+}
+
+.file-tree .children .item:before {
+  content: "";
+  left: -18px;
+  bottom: 16px;
+  width: 16px;
+  height: 9999px;
+  position: absolute;
+  border-width: 0 0 1px 1px;
+  border-style: solid;
+  border-color: #dbdbdb;
+  border-radius: 0 0 0 3px;
+}
+
+//tr:nth-child(2n) {
+//  background: #282c34 !important;
+//}
+
+tr td {
+  padding: 20px 30px;
+  vertical-align: top;
+  line-height: 1.5;
+}

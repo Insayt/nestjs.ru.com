@@ -1,9 +1,9 @@
 ---
 home: true
-heroImage: https://v1.vuepress.vuejs.org/hero.png
-tagline: test
-actionText: Quick Start →
-actionLink: /guide/
+heroImage: /logo.svg
+tagline: Прогрессивный Node.js фреймворк для создания эффективных, надежных и масштабируемых приложений на сервере.
+actionText: Начнём →
+actionLink: /guide/introduction
 features:
 - title: Feature 1 Title
   details: Feature 1 Description

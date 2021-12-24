@@ -5,7 +5,7 @@ module.exports = {
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title
    */
-  title: "Vuepress Docs Boilerplate",
+  title: "NestJS",
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#description
    */
@@ -32,6 +32,7 @@ module.exports = {
    */
   theme: "default-prefers-color-scheme",
   themeConfig: {
+    logo: "/logo.svg",
     overrideTheme: "dark",
     repo: "",
     editLinks: false,
@@ -52,15 +53,23 @@ module.exports = {
         link: "https://v1.vuepress.vuejs.org",
       },
     ],
-    sidebar: {
-      "/guide/": [
-        {
-          title: "Guide",
-          collapsable: false,
-          children: ["", "using-vue"],
-        },
-      ],
-    },
+    // sidebar: {
+    //   "/guide/": [
+    //     {
+    //       title: "Обзор",
+    //       collapsable: false,
+    //       children: ["", "using-vue"],
+    //     },
+    //   ],
+    // },
+    sidebar: [
+      ["/guide/introduction", "Введение"],
+      {
+        title: "Обзор",
+        collapsable: false,
+        children: [["/guide/first-steps", "Первые шаги"]],
+      },
+    ],
   },
 
   /**
