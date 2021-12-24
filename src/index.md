@@ -5,7 +5,7 @@ tagline: Прогрессивный Node.js фреймворк для созда
 actionText: Начнём →
 actionLink: /guide/introduction
 features:
-- title: Feature 1 Title
+- title: Feature 2 Title
   details: Feature 1 Description
 - title: Feature 2 Title
   details: Feature 2 Description

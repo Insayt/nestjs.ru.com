@@ -51,12 +51,34 @@
   border-radius: 0 0 0 3px;
 }
 
-//tr:nth-child(2n) {
-//  background: #282c34 !important;
-//}
-
 tr td {
   padding: 20px 30px;
   vertical-align: top;
   line-height: 1.5;
+}
+
+blockquote {
+  border-left-color: #3eaf7c;
+  &:before {
+    display inline-block;
+    content: 'Подсказка ☝️';
+    color: white;
+    padding: 0.25rem 0.5rem;
+    margin-bottom: 15px;
+    background-color: #3eaf7c;
+    border-radius: 6px;
+  }
+}
+
+.filename {
+  padding: 10px 1.5rem;
+  background-color: var(--codeBgColor);
+  margin-bottom: -14px;
+  border-radius: 6px 6px 0 0 !important;
+  font-size: 14px;
+  border-bottom: 1px solid var(--borderColor);
+
+  & + .extra-class {
+    border-radius: 0 0 6px 6px !important;
+  }
 }

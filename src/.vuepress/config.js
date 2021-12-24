@@ -1,5 +1,3 @@
-const { description } = require("../../package");
-
 module.exports = {
   // base: "/nestjs.ru.com/",
   /**
@@ -9,7 +7,7 @@ module.exports = {
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#description
    */
-  description: description,
+  description: "Nest js русская документация | Nest js документация на русском",
 
   /**
    * Extra tags to be injected to the page HTML `<head>`
@@ -67,7 +65,10 @@ module.exports = {
       {
         title: "Обзор",
         collapsable: false,
-        children: [["/guide/first-steps", "Первые шаги"]],
+        children: [
+          ["/guide/first-steps", "Первые шаги"],
+          ["/guide/controllers", "Контроллеры"],
+        ],
       },
     ],
   },
