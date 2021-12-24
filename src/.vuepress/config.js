@@ -1,7 +1,7 @@
 const { description } = require("../../package");
 
 module.exports = {
-  base: "/nestjs.ru.com/",
+  // base: "/nestjs.ru.com/",
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title
    */
