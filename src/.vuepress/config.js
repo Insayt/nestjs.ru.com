@@ -51,15 +51,6 @@ module.exports = {
         link: "https://v1.vuepress.vuejs.org",
       },
     ],
-    // sidebar: {
-    //   "/guide/": [
-    //     {
-    //       title: "Обзор",
-    //       collapsable: false,
-    //       children: ["", "using-vue"],
-    //     },
-    //   ],
-    // },
     sidebar: [
       ["/guide/introduction", "Введение"],
       {
@@ -68,6 +59,7 @@ module.exports = {
         children: [
           ["/guide/first-steps", "Первые шаги"],
           ["/guide/controllers", "Контроллеры"],
+          ["/guide/providers", "Провайдеры"],
         ],
       },
     ],
