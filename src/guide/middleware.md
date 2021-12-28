@@ -214,6 +214,6 @@ app.use(logger);
 await app.listen(3000);
 ```
 > Доступ к DI-контейнеру в глобальных middleware невозможен. Вместо этого вы можете использовать 
-> [функциональный middleware](middleware#functional-middleware) при использовании `app.use()`. В качестве альтернативы, 
+> [функциональный middleware](/guide/middleware.html#функциональные-middleware) при использовании `app.use()`. В качестве альтернативы, 
 > вы можете сделать middleware класс и использовать его с помощью `.forRoutes('*')` внутри `AppModule` 
 > (или любого другого модуля).

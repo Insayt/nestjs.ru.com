@@ -62,6 +62,7 @@ module.exports = {
           ["/guide/providers", "Провайдеры"],
           ["/guide/modules", "Модули"],
           ["/guide/middleware", "Middleware"],
+          ["/guide/exception-filters", "Фильтры исключений"],
         ],
       },
     ],
