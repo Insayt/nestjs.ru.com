@@ -65,6 +65,7 @@ module.exports = {
           ["/guide/exception-filters", "Фильтры исключений"],
           ["/guide/pipes", "Pipes"],
           ["/guide/guards", "Guards"],
+          ["/guide/interceptors", "Interceptors"],
         ],
       },
     ],
