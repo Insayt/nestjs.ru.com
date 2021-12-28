@@ -66,6 +66,7 @@ module.exports = {
           ["/guide/pipes", "Pipes"],
           ["/guide/guards", "Guards"],
           ["/guide/interceptors", "Interceptors"],
+          ["/guide/custom-decorators", "Пользовательские декораторы"],
         ],
       },
     ],
