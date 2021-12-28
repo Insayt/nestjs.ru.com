@@ -1,0 +1,199 @@
+# Pipes
+
+Pipe - это класс, аннотированный декоратором `@Injectable()`. Pipe должен реализовывать интерфейс `PipeTransform`.
+
+<img src="/Pipe_1.png" />
+
+Pipes имеют два типичных случая использования:
+
+- **трансформация**: преобразование входных данных в нужную форму (например, из строки в целое число).
+- **валидация**: оценить входные данные и, если они верны, просто передать их без изменений; в противном случае, 
+  если данные неверны, выдать исключение.
+
+В обоих случаях pipes работают с `аргументами`, обрабатываемыми [обработчиком маршрута контроллера](/guide/controllers.html#параметры-маршрута). 
+Nest устанавливает pipe непосредственно перед вызовом метода, и этот pipe получает аргументы, предназначенные для 
+метода, и работает с ними. Любая операция преобразования или проверки происходит в это время, после чего вызывается 
+обработчик маршрута с любыми (потенциально) преобразованными аргументами.
+
+Nest поставляется с рядом встроенных pipes, которые вы можете использовать "из коробки". Вы также можете создавать свои 
+собственные pipes. В этой главе мы познакомимся со встроенными pipes и покажем, как привязать их к обработчикам 
+маршрутов. Затем мы рассмотрим несколько пользовательских pipes, чтобы показать, как можно создать их с нуля.
+
+> Pipes работают внутри зоны исключений. Это означает, что когда Pipe выбрасывает исключение, оно обрабатывается уровнем 
+> исключений (глобальный фильтр исключений и любые [фильтры исключений](/guide/exception-filters.html), которые применяются 
+> к текущему контексту). Учитывая вышесказанное, должно быть понятно, что когда исключение выбрасывается в Pipe, 
+> ни один метод контроллера впоследствии не выполняется. Это дает вам наилучшую методику проверки данных, поступающих 
+> в приложение из внешних источников.
+
+## Встроенные pipes
+
+Nest поставляется с восемью pipes, доступными из коробки:
+
+- `ValidationPipe`
+- `ParseIntPipe`
+- `ParseFloatPipe`
+- `ParseBoolPipe`
+- `ParseArrayPipe`
+- `ParseUUIDPipe`
+- `ParseEnumPipe`
+- `DefaultValuePipe`
+
+Они экспортируются из пакета `@nestjs/common`.
+
+Давайте рассмотрим использование `ParseIntPipe`. Это пример использования **трансформации**, где pipe обеспечивает 
+преобразование параметра обработчика метода в целое число JavaScript (или выбрасывает исключение, если преобразование 
+не удалось). Позже в этой главе мы покажем простую пользовательскую реализацию для `ParseIntPipe`. Приведенные ниже 
+примеры также применимы к другим встроенным pipes для трансформации данных (`ParseBoolPipe`, `ParseFloatPipe`, 
+`ParseEnumPipe`, `ParseArrayPipe` и `ParseUUIDPipe`, которые в этой главе мы будем называть семейством `Parse*`).
+
+## Привязка pipe
+
+Чтобы использовать pipe, нам нужно привязать экземпляр класса pipe к соответствующему контексту. 
+В нашем примере `ParseIntPipe` мы хотим связать pipe с определенным методом обработчика маршрута и убедиться, 
+что он будет запущен до вызова метода. Мы сделаем это с помощью следующей конструкции, которую мы будем 
+называть привязкой pipe на уровне параметров метода:
+
+```typescript
+@Get(':id')
+async findOne(@Param('id', ParseIntPipe) id: number) {
+  return this.catsService.findOne(id);
+}
+```
+
+Это гарантирует, что одно из следующих двух условий верно: либо параметр, который мы получаем в методе `findOne()`, 
+является числом (как и ожидалось в нашем вызове `this.catsService.findOne()`), либо исключение будет выброшено 
+до вызова обработчика маршрута.
+
+Например, предположим, что маршрут вызывается следующим образом:
+
+```bash
+GET localhost:3000/abc
+```
+
+Nest выбросит исключение, подобное этому:
+
+```json
+{
+  "statusCode": 400,
+  "message": "Validation failed (numeric string is expected)",
+  "error": "Bad Request"
+}
+```
+
+Исключение не позволит выполнить тело метода `findOne()`.
+
+В приведенном выше примере мы передаем класс (`ParseIntPipe`), а не экземпляр, оставляя ответственность 
+за инстанцирование фреймворку и обеспечивая внедрение зависимостей. Как и в случае с pipes и guards, 
+мы можем вместо этого передать экземпляр на месте. Передача экземпляра на месте полезна, если мы хотим настроить 
+поведение встроенной pipe путем передачи опций:
+
+```typescript
+@Get(':id')
+async findOne(
+  @Param('id', new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }))
+  id: number,
+) {
+  return this.catsService.findOne(id);
+}
+```
+
+Привязка других pipe преобразования (семейство **Parse\***) работает аналогично. Все эти pipes работают 
+в контексте проверки параметров маршрута, параметров строки запроса и значений тела запроса.
+
+Например, с параметром строки запроса:
+
+```typescript
+@Get()
+async findOne(@Query('id', ParseIntPipe) id: number) {
+  return this.catsService.findOne(id);
+}
+```
+
+Вот пример использования `ParseUUIDPipe` для разбора строкового параметра и проверки, является ли он UUID.
+
+```typescript
+@Get(':uuid')
+async findOne(@Param('uuid', new ParseUUIDPipe()) uuid: string) {
+  return this.catsService.findOne(uuid);
+}
+```
+
+> При использовании `ParseUUIDPipe()` вы разбираете UUID версии 3, 4 или 5, если вам требуется только определенная 
+> версия UUID, вы можете передать версию в опциях pipe.
+
+Выше мы рассмотрели примеры связывания различных встроенных pipe семейства `Parse*`. Привязка pipe валидации 
+немного отличается; мы обсудим это в следующем разделе.
+
+> Также смотрите [Техники валидации](/guide/techniques/validation) для подробных примеров pipe валидации.
+
+## Пользовательские pipes
+
+Как уже говорилось, вы можете создавать собственные пользовательские pipes. Хотя Nest предоставляет надежные 
+встроенные `ParseIntPipe` и `ValidationPipe`, давайте построим простые пользовательские версии каждого из них с нуля, 
+чтобы увидеть, как создаются пользовательские pipes.
+
+Начнем с простого `ValidationPipe`. Изначально мы попросим его просто принимать входное значение и немедленно 
+возвращать то же значение.
+
+<div class="filename">validation.pipe.ts</div>
+
+```typescript
+import { PipeTransform, Injectable, ArgumentMetadata } from '@nestjs/common';
+@Injectable()
+export class ValidationPipe implements PipeTransform {
+  transform(value: any, metadata: ArgumentMetadata) {
+    return value;
+  }
+}
+```
+> `PipeTransform<T, R>` - это общий интерфейс, который должен быть реализован любым pipe. Общий интерфейс использует `T` 
+> для указания типа входного `value` и `R` для указания возвращаемого типа метода `transform()`.
+
+Каждый pipe должнен реализовать метод `transform()` для выполнения контракта интерфейса `PipeTransform`. Этот метод 
+имеет два параметра:
+
+- `value`
+- `metadata`
+
+Параметр `value` - это текущий обрабатываемый аргумент метода (до его получения методом обработки маршрута), 
+а `metadata` - это метаданные текущего обрабатываемого аргумента метода. Объект метаданных имеет следующие свойства:
+
+```typescript
+export interface ArgumentMetadata {
+  type: 'body' | 'query' | 'param' | 'custom';
+  metatype?: Type<unknown>;
+  data?: string;
+}
+```
+Эти свойства описывают текущий обрабатываемый аргумент.
+
+<table>
+  <tr>
+    <td>
+      <code>type</code>
+    </td>
+    <td>Indicates whether the argument is a body
+      <code>@Body()</code>, query
+      <code>@Query()</code>, param
+      <code>@Param()</code>, or a custom parameter (read more
+      <a routerLink="/custom-decorators">here</a>).</td>
+  </tr>
+  <tr>
+    <td>
+      <code>metatype</code>
+    </td>
+    <td>
+      Provides the metatype of the argument, for example,
+      <code>String</code>. Note: the value is
+      <code>undefined</code> if you either omit a type declaration in the route handler method signature, or use vanilla JavaScript.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>data</code>
+    </td>
+    <td>The string passed to the decorator, for example
+      <code>@Body('string')</code>. It's
+      <code>undefined</code> if you leave the decorator parenthesis empty.</td>
+  </tr>
+</table>

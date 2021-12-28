@@ -63,6 +63,7 @@ module.exports = {
           ["/guide/modules", "Модули"],
           ["/guide/middleware", "Middleware"],
           ["/guide/exception-filters", "Фильтры исключений"],
+          ["/guide/pipes", "Pipes"],
         ],
       },
     ],
