@@ -1,6 +1,8 @@
 # nestjs.ru.com
 
-![logo](https://raw.githubusercontent.com/Insayt/nestjs.ru.com/master/src/.vuepress/public/logo.svg | width=100)
+<div style="text-align: center">
+    <img src="https://raw.githubusercontent.com/Insayt/nestjs.ru.com/master/src/.vuepress/public/logo.svg" width="200">
+</div>
 
 Русская версия документации по фреймворку [Nest JS](https://nestjs.com/)
 
