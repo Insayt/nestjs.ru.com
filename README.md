@@ -1,6 +1,6 @@
 # nestjs.ru.com
 
-![logo](https://raw.githubusercontent.com/Insayt/nestjs.ru.com/master/src/.vuepress/public/logo.svg)
+![logo](https://raw.githubusercontent.com/Insayt/nestjs.ru.com/master/src/.vuepress/public/logo.svg | width=100)
 
 Русская версия документации по фреймворку [Nest JS](https://nestjs.com/)
 
