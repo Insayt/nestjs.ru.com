@@ -38,17 +38,17 @@ module.exports = {
     editLinkText: "",
     lastUpdated: false,
     nav: [
+      // {
+      //   text: "Раздел 1",
+      //   link: "/guide/",
+      // },
+      // {
+      //   text: "Раздел 2",
+      //   link: "/config/",
+      // },
       {
-        text: "Раздел 1",
-        link: "/guide/",
-      },
-      {
-        text: "Раздел 2",
-        link: "/config/",
-      },
-      {
-        text: "VuePress",
-        link: "https://v1.vuepress.vuejs.org",
+        text: "Github",
+        link: "https://github.com/Insayt/nestjs.ru.com",
       },
     ],
     sidebar: [
@@ -93,6 +93,12 @@ module.exports = {
       {
         changefreq: "always",
         hostname: "https://nestjs.ru.com",
+      },
+    ],
+    [
+      "metrika",
+      {
+        counter: "87021734",
       },
     ],
   ],
