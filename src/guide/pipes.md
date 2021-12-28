@@ -226,6 +226,7 @@ export class CreateCatDto {
   age: number;
   breed: string;
 }
+
 ```
 
 Мы хотим убедиться, что любой входящий запрос к методу create содержит валидный body. Поэтому мы должны проверить 
@@ -243,4 +244,306 @@ export class CreateCatDto {
 Это, конечно, именно тот случай использования, для которого предназначены pipes. Итак, давайте продолжим и доработаем 
 наш pipe валидации.
 
+<demo-component></demo-component>
 
+## Валидация схемы объекта
+
+Существует несколько подходов к проверке объектов чистым, [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) 
+способом. Одним из распространенных подходов является использование **проверки на основе схемы**. Давайте попробуем 
+применить этот подход.
+
+Библиотека [Joi](https://github.com/sideway/joi) позволяет создавать схемы простым способом, с читаемым API. 
+Давайте построим pipe валидации, который использует схемы на основе Joi.
+
+Начнем с установки необходимого пакета:
+
+```bash
+$ npm install --save joi
+$ npm install --save-dev @types/joi
+```
+
+В приведенном ниже примере кода мы создаем простой класс, который принимает схему в качестве аргумента `constructor`. 
+Затем мы применяем метод `schema.validate()`, который проверяет наш входящий аргумент на соответствие предоставленной схеме.
+
+Как было отмечено ранее, **pipe валидации** либо возвращает значение без изменений, либо выбрасывает исключение.
+
+В следующем разделе вы увидите, как мы предоставляем соответствующую схему для данного метода контроллера с помощью 
+декоратора `@UsePipes()`. Это делает наш pipe валидации пригодным для повторного использования в разных контекстах, 
+как мы и собирались сделать.
+
+```typescript
+import { PipeTransform, Injectable, ArgumentMetadata, BadRequestException } from '@nestjs/common';
+import { ObjectSchema } from 'joi';
+@Injectable()
+export class JoiValidationPipe implements PipeTransform {
+  constructor(private schema: ObjectSchema) {}
+  transform(value: any, metadata: ArgumentMetadata) {
+    const { error } = this.schema.validate(value);
+    if (error) {
+      throw new BadRequestException('Validation failed');
+    }
+    return value;
+  }
+}
+```
+
+#### Привязка pipe валидации
+
+Ранее мы рассмотрели, как связывать pipe преобразования (например, `ParseIntPipe` и остальные pipe семейства `Parse*`).
+
+Привязка pipe валидации также очень проста.
+
+В этом случае мы хотим привязать pipe на уровне вызова метода. В нашем примере для использования `JoiValidationPipe` 
+нам нужно сделать следующее:
+
+1. Создать экземпляр `JoiValidationPipe`.
+2. Передать контекстно-специфическую схему Joi в конструктор класса pipe.
+3. Привязать pipe к методу
+
+Мы делаем это с помощью декоратора `@UsePipes()`, как показано ниже:
+
+```typescript
+@Post()
+@UsePipes(new JoiValidationPipe(createCatSchema))
+async create(@Body() createCatDto: CreateCatDto) {
+  this.catsService.create(createCatDto);
+}
+```
+
+> Декоратор `@UsePipes()` импортируется из пакета `@nestjs/common`.
+
+#### Валидатор классов
+
+> Техники в этом разделе требуют TypeScript и недоступны, если ваше приложение написано на ванильном JavaScript.
+
+Давайте рассмотрим альтернативную реализацию нашей техники валидации.
+
+Nest хорошо работает с библиотекой [class-validator](https://github.com/typestack/class-validator). Эта мощная 
+библиотека позволяет использовать валидацию на основе декораторов. Валидация на основе декораторов является чрезвычайно 
+мощной, особенно в сочетании с возможностями **Pipe** в Nest, поскольку мы имеем доступ к `metatype` обрабатываемого свойства. 
+Прежде чем мы начнем, нам нужно установить необходимые пакеты:
+
+```bash
+$ npm i --save class-validator class-transformer
+```
+
+После их установки мы можем добавить несколько декораторов к классу `CreateCatDto`. Здесь мы видим значительное 
+преимущество этой техники: класс `CreateCatDto` остается единственным источником истины для нашего объекта Post body 
+(вместо того, чтобы создавать отдельный класс валидации).
+
+<div class="filename">create-cat.dto.ts</div>
+
+```typescript
+import { IsString, IsInt } from 'class-validator';
+export class CreateCatDto {
+  @IsString()
+  name: string;
+  @IsInt()
+  age: number;
+  @IsString()
+  breed: string;
+}
+```
+
+> Подробнее о декораторах class-validator [здесь](https://github.com/typestack/class-validator#usage).
+
+Теперь мы можем создать класс `ValidationPipe`, который использует эти аннотации.
+
+<div class="filename">validation.pipe.ts</div>
+
+```typescript
+import { PipeTransform, Injectable, ArgumentMetadata, BadRequestException } from '@nestjs/common';
+import { validate } from 'class-validator';
+import { plainToClass } from 'class-transformer';
+@Injectable()
+export class ValidationPipe implements PipeTransform<any> {
+  async transform(value: any, { metatype }: ArgumentMetadata) {
+    if (!metatype || !this.toValidate(metatype)) {
+      return value;
+    }
+    const object = plainToClass(metatype, value);
+    const errors = await validate(object);
+    if (errors.length > 0) {
+      throw new BadRequestException('Validation failed');
+    }
+    return value;
+  }
+  private toValidate(metatype: Function): boolean {
+    const types: Function[] = [String, Boolean, Number, Array, Object];
+    return !types.includes(metatype);
+  }
+}
+```
+
+> Выше мы использовали библиотеку [class-transformer](https://github.com/typestack/class-transformer). 
+> Она создана тем же автором, что и библиотека **class-validator**, и в результате они очень хорошо работают вместе.
+
+Давайте пройдемся по этому коду. Во-первых, обратите внимание, что метод `transform()` помечен как `async`. Это возможно 
+потому, что Nest поддерживает как синхронные, так и **асинхронные** pipe. Мы сделали этот метод `async`, потому что некоторые 
+проверки класса-валидатора [могут быть async](https://github.com/typestack/class-validator#custom-validation-classes) (используют Promises).
+
+Далее обратите внимание, что мы используем деструктуризацию для извлечения поля metatype (извлечение только этого 
+члена из `ArgumentMetadata`) в наш параметр `metatype`. Это просто сокращение для получения полных `ArgumentMetadata` 
+и последующего дополнительного оператора для присвоения переменной metatype.
+
+Далее, обратите внимание на вспомогательную функцию `toValidate()`. Она отвечает за обход шага валидации, когда текущий 
+обрабатываемый аргумент является собственным типом JavaScript (к ним не могут быть подключены декораторы валидации, 
+поэтому нет причин пропускать их через шаг валидации).
+
+Далее мы используем функцию class-transformer `plainToClass()` для преобразования нашего обычного объекта аргумента 
+JavaScript в типизированный объект, чтобы мы могли применить валидацию. Причина, по которой мы должны это сделать, 
+заключается в том, что входящий объект post body, когда он десериализован из сетевого запроса, **не имеет никакой 
+информации о типе** (так работает базовая платформа, такая как Express). Class-validator должен использовать декораторы 
+проверки, которые мы определили для нашего DTO ранее, поэтому нам нужно выполнить это преобразование, чтобы рассматривать 
+входящее тело запроса как соответствующим образом оформленный объект, а не просто обычный объект.
+
+Наконец, как было отмечено ранее, поскольку это **pipe валидации**, он либо возвращает значение без изменений, либо 
+выбрасывает исключение.
+
+Последним шагом является привязка `ValidationPipe`. Pipes могут быть с привязкой к параметрам, методам, контроллерам 
+или глобальной привязкой. Ранее, на примере pipe валидации на основе Joi, мы видели пример привязки pipe на уровне метода.
+В примере ниже мы привяжем экземпляр pipe к декоратору обработчика маршрута `@Body()`, чтобы наш pipe вызывался 
+для проверки тела запроса.
+
+<div class="filename">cats.controller.ts</div>
+
+```typescript
+@Post()
+async create(
+  @Body(new ValidationPipe()) createCatDto: CreateCatDto,
+) {
+  this.catsService.create(createCatDto);
+}
+```
+
+Pipes привязанные к параметрам полезны, когда логика валидации касается только одного заданного параметра.
+
+## Глобальные pipes
+
+Поскольку `ValidationPipe` был создан для того, чтобы быть как можно более общим, мы можем полностью реализовать 
+его полезность, настроив его как **глобальный** pipe, чтобы он применялся к каждому обработчику маршрутов во всем приложении.
+
+<div class="filename">main.ts</div>
+
+```typescript
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  app.useGlobalPipes(new ValidationPipe());
+  await app.listen(3000);
+}
+bootstrap();
+```
+
+
+> В случае <a href="/guide/faq/hybrid-application">гибридных приложений</a> метод `useGlobalPipes()` не устанавливает 
+> pipe для шлюзов и микросервисов. Для "стандартных" (негибридных) микросервисных приложений метод `useGlobalPipes()` 
+> действительно монтирует pipe глобально.
+
+Глобальные pipe используются во всем приложении, для каждого контроллера и каждого обработчика маршрутов.
+
+Обратите внимание, что с точки зрения инъекции зависимостей глобальные pipe, зарегистрированные вне какого-либо 
+модуля (с `useGlobalPipes()`, как в примере выше), не могут инъектировать зависимости, поскольку привязка была выполнена 
+вне контекста какого-либо модуля. Чтобы решить эту проблему, вы можете установить глобальный pipe **непосредственно из любого модуля**, 
+используя следующую конструкцию:
+
+
+<div class="filename">app.module.ts</div>
+
+```typescript
+import { Module } from '@nestjs/common';
+import { APP_PIPE } from '@nestjs/core';
+@Module({
+  providers: [
+    {
+      provide: APP_PIPE,
+      useClass: ValidationPipe,
+    },
+  ],
+})
+export class AppModule {}
+```
+
+> При использовании этого подхода для выполнения инъекции зависимостей для pipe, обратите внимание, что независимо от 
+> модуля, в котором используется эта конструкция, pipe, по сути, является глобальным. Где это должно быть сделано? 
+> Выберите модуль, в котором определен pipe (`ValidationPipe` в примере выше). Кроме того, `useClass` - не единственный 
+> способ работы с регистрацией пользовательских провайдеров. Узнайте больше [здесь](/guide//fundamentals/custom-providers).
+
+## Встроенный ValidationPipe
+
+Напоминаем, что вам не нужно самостоятельно создавать общий pipe валидации, поскольку `ValidationPipe` предоставляется 
+Nest "из коробки". Встроенный `ValidationPipe` предлагает больше возможностей, чем образец, 
+который мы создали в этой главе и который был оставлен базовым для иллюстрации механики пользовательских pipes. 
+Полную информацию, а также множество примеров можно найти [здесь](/guide/techniques/validation).
+
+## Использование преобразования
+
+Валидация - не единственный случай использования пользовательских pipe. В начале этой главы мы упомянули, что pipe может 
+также **преобразовывать** входные данные в нужный формат. Это возможно потому, что значение, возвращаемое функцией 
+`transform`, полностью отменяет предыдущее значение аргумента.
+
+Когда это полезно? Учтите, что иногда данные, переданные от клиента, должны быть изменены - например, строка преобразуется 
+в целое число - прежде чем они будут правильно обработаны методом обработчика маршрута. Кроме того, 
+некоторые необходимые поля данных могут отсутствовать, и мы хотели бы применить значения по умолчанию. 
+**Pipe трансформации** могут выполнять эти функции, вставляя функцию обработки между запросом клиента и обработчиком запроса.
+
+Вот простой `ParseIntPipe`, который отвечает за разбор строки в целочисленное значение. (Как отмечалось выше, в Nest 
+есть встроенный `ParseIntPipe`, который является более сложным; мы включили его в качестве простого примера пользовательского
+pipe трансформации).
+
+<div class="filename">parse-int.pipe.ts</div>
+
+```typescript
+import { PipeTransform, Injectable, ArgumentMetadata, BadRequestException } from '@nestjs/common';
+@Injectable()
+export class ParseIntPipe implements PipeTransform<string, number> {
+  transform(value: string, metadata: ArgumentMetadata): number {
+    const val = parseInt(value, 10);
+    if (isNaN(val)) {
+      throw new BadRequestException('Validation failed');
+    }
+    return val;
+  }
+}
+```
+
+Затем мы можем привязать этот pipe к выбранному параметру, как показано ниже:
+
+```typescript
+@Get(':id')
+async findOne(@Param('id', new ParseIntPipe()) id) {
+  return this.catsService.findOne(id);
+}
+```
+
+Другим полезным случаем преобразования будет выбор **существующего пользователя** из базы данных, используя 
+идентификатор, указанный в запросе:
+
+```typescript
+@Get(':id')
+findOne(@Param('id', UserByIdPipe) userEntity: UserEntity) {
+  return userEntity;
+}
+```
+
+Мы оставляем реализацию этого pipe читателю, но отметим, что, как и все другие каналы преобразования, он принимает 
+входное значение (`id`) и возвращает выходное значение (объект `UserEntity`). Это может сделать ваш код более декларативным 
+и [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself), абстрагируя код запроса к БД с пользователями из вашего обработчика 
+в общий pipe.
+
+#### Предоставление значений по умолчанию
+
+Pipes семейства `Parse*` ожидают, что значение параметра будет определено. При получении значений `null` или `undefined` 
+они выбрасывают исключение. Чтобы позволить конечной точке обрабатывать отсутствующие значения параметров, мы должны 
+предоставить значение по умолчанию, которое будет вводиться до того, как трубы `Parse*` начнут работать с этими значениями. 
+Для этой цели служит pipe `DefaultValuePipe`. Просто инстанцируйте `DefaultValuePipe` в декораторе `@Query()` 
+перед соответствующим pipe `Parse*`, как показано ниже:
+
+```typescript
+@Get()
+async findAll(
+  @Query('activeOnly', new DefaultValuePipe(false), ParseBoolPipe) activeOnly: boolean,
+  @Query('page', new DefaultValuePipe(0), ParseIntPipe) page: number,
+) {
+  return this.catsService.findAll({ activeOnly, page });
+}
+```

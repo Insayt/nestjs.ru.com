@@ -1,5 +1,5 @@
 module.exports = {
-  // base: "/nestjs.ru.com/",
+  base: "/",
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title
    */
