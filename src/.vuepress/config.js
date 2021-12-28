@@ -69,6 +69,16 @@ module.exports = {
           ["/guide/custom-decorators", "Пользовательские декораторы"],
         ],
       },
+      {
+        title: "Основы",
+        collapsable: false,
+        children: [
+          [
+            "/guide/fundamentals/custom-providers",
+            "Пользовательские провайдеры",
+          ],
+        ],
+      },
     ],
   },
 
