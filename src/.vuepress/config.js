@@ -60,6 +60,8 @@ module.exports = {
           ["/guide/first-steps", "Первые шаги"],
           ["/guide/controllers", "Контроллеры"],
           ["/guide/providers", "Провайдеры"],
+          ["/guide/modules", "Модули"],
+          ["/guide/middleware", "Middleware"],
         ],
       },
     ],
