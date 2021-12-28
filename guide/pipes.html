@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Pipes | NestJS</title>
+    <meta name="generator" content="VuePress 1.9.1">
+    
+    <meta name="description" content="Nest js русская документация | Nest js документация на русском">
+    <meta name="theme-color" content="#3eaf7c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+    <link rel="preload" href="/assets/css/0.styles.372b569a.css" as="style"><link rel="preload" href="/assets/js/app.907b85a3.js" as="script"><link rel="preload" href="/assets/js/2.6ffe1b8d.js" as="script"><link rel="preload" href="/assets/js/17.1c714d4c.js" as="script"><link rel="prefetch" href="/assets/js/10.b20719ca.js"><link rel="prefetch" href="/assets/js/11.ba640f3d.js"><link rel="prefetch" href="/assets/js/12.ea47e399.js"><link rel="prefetch" href="/assets/js/13.a24035a9.js"><link rel="prefetch" href="/assets/js/14.26a7dcaa.js"><link rel="prefetch" href="/assets/js/15.f781c832.js"><link rel="prefetch" href="/assets/js/16.72c5e522.js"><link rel="prefetch" href="/assets/js/18.7b07190a.js"><link rel="prefetch" href="/assets/js/19.c2f8e4c7.js"><link rel="prefetch" href="/assets/js/20.a9870fb8.js"><link rel="prefetch" href="/assets/js/3.54e8059d.js"><link rel="prefetch" href="/assets/js/4.10291e14.js"><link rel="prefetch" href="/assets/js/5.720108e1.js"><link rel="prefetch" href="/assets/js/6.2ad59a3b.js"><link rel="prefetch" href="/assets/js/7.5a6a118a.js"><link rel="prefetch" href="/assets/js/8.08590646.js"><link rel="prefetch" href="/assets/js/9.91b56dc7.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.372b569a.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.svg" alt="NestJS" class="logo"> <span class="site-name can-hide">NestJS</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/guide/" class="nav-link router-link-active">
+  Раздел 1
+</a></div><div class="nav-item"><a href="/config/" class="nav-link">
+  Раздел 2
+</a></div><div class="nav-item"><a href="https://v1.vuepress.vuejs.org" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  VuePress
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/guide/" class="nav-link router-link-active">
+  Раздел 1
+</a></div><div class="nav-item"><a href="/config/" class="nav-link">
+  Раздел 2
+</a></div><div class="nav-item"><a href="https://v1.vuepress.vuejs.org" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  VuePress
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/guide/introduction.html" class="sidebar-link">Введение</a></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Обзор</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/guide/first-steps.html" class="sidebar-link">Первые шаги</a></li><li><a href="/guide/controllers.html" class="sidebar-link">Контроллеры</a></li><li><a href="/guide/providers.html" class="sidebar-link">Провайдеры</a></li><li><a href="/guide/modules.html" class="sidebar-link">Модули</a></li><li><a href="/guide/middleware.html" class="sidebar-link">Middleware</a></li><li><a href="/guide/exception-filters.html" class="sidebar-link">Фильтры исключений</a></li><li><a href="/guide/pipes.html" aria-current="page" class="active sidebar-link">Pipes</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/guide/pipes.html#встроенные-pipes" class="sidebar-link">Встроенные pipes</a></li><li class="sidebar-sub-header"><a href="/guide/pipes.html#привязка-pipe" class="sidebar-link">Привязка pipe</a></li><li class="sidebar-sub-header"><a href="/guide/pipes.html#пользовательские-pipes" class="sidebar-link">Пользовательские pipes</a></li><li class="sidebar-sub-header"><a href="/guide/pipes.html#валидация-на-основе-схемы" class="sidebar-link">Валидация на основе схемы</a></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="pipes"><a href="#pipes" class="header-anchor">#</a> Pipes</h1> <p>Pipe - это класс, аннотированный декоратором <code>@Injectable()</code>. Pipe должен реализовывать интерфейс <code>PipeTransform</code>.</p> <img src="/Pipe_1.png"> <p>Pipes имеют два типичных случая использования:</p> <ul><li><strong>трансформация</strong>: преобразование входных данных в нужную форму (например, из строки в целое число).</li> <li><strong>валидация</strong>: оценить входные данные и, если они верны, просто передать их без изменений; в противном случае,
+если данные неверны, выдать исключение.</li></ul> <p>В обоих случаях pipes работают с <code>аргументами</code>, обрабатываемыми <a href="/guide/controllers.html#параметры-маршрута">обработчиком маршрута контроллера</a>.
+Nest устанавливает pipe непосредственно перед вызовом метода, и этот pipe получает аргументы, предназначенные для
+метода, и работает с ними. Любая операция преобразования или проверки происходит в это время, после чего вызывается
+обработчик маршрута с любыми (потенциально) преобразованными аргументами.</p> <p>Nest поставляется с рядом встроенных pipes, которые вы можете использовать &quot;из коробки&quot;. Вы также можете создавать свои
+собственные pipes. В этой главе мы познакомимся со встроенными pipes и покажем, как привязать их к обработчикам
+маршрутов. Затем мы рассмотрим несколько пользовательских pipes, чтобы показать, как можно создать их с нуля.</p> <blockquote><p>Pipes работают внутри зоны исключений. Это означает, что когда Pipe выбрасывает исключение, оно обрабатывается уровнем
+исключений (глобальный фильтр исключений и любые <a href="/guide/exception-filters.html">фильтры исключений</a>, которые применяются
+к текущему контексту). Учитывая вышесказанное, должно быть понятно, что когда исключение выбрасывается в Pipe,
+ни один метод контроллера впоследствии не выполняется. Это дает вам наилучшую методику проверки данных, поступающих
+в приложение из внешних источников.</p></blockquote> <h2 id="встроенные-pipes"><a href="#встроенные-pipes" class="header-anchor">#</a> Встроенные pipes</h2> <p>Nest поставляется с восемью pipes, доступными из коробки:</p> <ul><li><code>ValidationPipe</code></li> <li><code>ParseIntPipe</code></li> <li><code>ParseFloatPipe</code></li> <li><code>ParseBoolPipe</code></li> <li><code>ParseArrayPipe</code></li> <li><code>ParseUUIDPipe</code></li> <li><code>ParseEnumPipe</code></li> <li><code>DefaultValuePipe</code></li></ul> <p>Они экспортируются из пакета <code>@nestjs/common</code>.</p> <p>Давайте рассмотрим использование <code>ParseIntPipe</code>. Это пример использования <strong>трансформации</strong>, где pipe обеспечивает
+преобразование параметра обработчика метода в целое число JavaScript (или выбрасывает исключение, если преобразование
+не удалось). Позже в этой главе мы покажем простую пользовательскую реализацию для <code>ParseIntPipe</code>. Приведенные ниже
+примеры также применимы к другим встроенным pipes для трансформации данных (<code>ParseBoolPipe</code>, <code>ParseFloatPipe</code>,
+<code>ParseEnumPipe</code>, <code>ParseArrayPipe</code> и <code>ParseUUIDPipe</code>, которые в этой главе мы будем называть семейством <code>Parse*</code>).</p> <h2 id="привязка-pipe"><a href="#привязка-pipe" class="header-anchor">#</a> Привязка pipe</h2> <p>Чтобы использовать pipe, нам нужно привязать экземпляр класса pipe к соответствующему контексту.
+В нашем примере <code>ParseIntPipe</code> мы хотим связать pipe с определенным методом обработчика маршрута и убедиться,
+что он будет запущен до вызова метода. Мы сделаем это с помощью следующей конструкции, которую мы будем
+называть привязкой pipe на уровне параметров метода:</p> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token decorator"><span class="token at operator">@</span><span class="token function">Get</span></span><span class="token punctuation">(</span><span class="token string">':id'</span><span class="token punctuation">)</span>
+<span class="token keyword">async</span> <span class="token function">findOne</span><span class="token punctuation">(</span><span class="token decorator"><span class="token at operator">@</span><span class="token function">Param</span></span><span class="token punctuation">(</span><span class="token string">'id'</span><span class="token punctuation">,</span> ParseIntPipe<span class="token punctuation">)</span> id<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>catsService<span class="token punctuation">.</span><span class="token function">findOne</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>Это гарантирует, что одно из следующих двух условий верно: либо параметр, который мы получаем в методе <code>findOne()</code>,
+является числом (как и ожидалось в нашем вызове <code>this.catsService.findOne()</code>), либо исключение будет выброшено
+до вызова обработчика маршрута.</p> <p>Например, предположим, что маршрут вызывается следующим образом:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>GET localhost:3000/abc
+</code></pre></div><p>Nest выбросит исключение, подобное этому:</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;statusCode&quot;</span><span class="token operator">:</span> <span class="token number">400</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Validation failed (numeric string is expected)&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;error&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Bad Request&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>Исключение не позволит выполнить тело метода <code>findOne()</code>.</p> <p>В приведенном выше примере мы передаем класс (<code>ParseIntPipe</code>), а не экземпляр, оставляя ответственность
+за инстанцирование фреймворку и обеспечивая внедрение зависимостей. Как и в случае с pipes и guards,
+мы можем вместо этого передать экземпляр на месте. Передача экземпляра на месте полезна, если мы хотим настроить
+поведение встроенной pipe путем передачи опций:</p> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token decorator"><span class="token at operator">@</span><span class="token function">Get</span></span><span class="token punctuation">(</span><span class="token string">':id'</span><span class="token punctuation">)</span>
+<span class="token keyword">async</span> <span class="token function">findOne</span><span class="token punctuation">(</span>
+  <span class="token decorator"><span class="token at operator">@</span><span class="token function">Param</span></span><span class="token punctuation">(</span><span class="token string">'id'</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">ParseIntPipe</span><span class="token punctuation">(</span><span class="token punctuation">{</span> errorHttpStatusCode<span class="token operator">:</span> HttpStatus<span class="token punctuation">.</span><span class="token constant">NOT_ACCEPTABLE</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  id<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>catsService<span class="token punctuation">.</span><span class="token function">findOne</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>Привязка других pipe преобразования (семейство <strong>Parse*</strong>) работает аналогично. Все эти pipes работают
+в контексте проверки параметров маршрута, параметров строки запроса и значений тела запроса.</p> <p>Например, с параметром строки запроса:</p> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token decorator"><span class="token at operator">@</span><span class="token function">Get</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">async</span> <span class="token function">findOne</span><span class="token punctuation">(</span><span class="token decorator"><span class="token at operator">@</span><span class="token function">Query</span></span><span class="token punctuation">(</span><span class="token string">'id'</span><span class="token punctuation">,</span> ParseIntPipe<span class="token punctuation">)</span> id<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>catsService<span class="token punctuation">.</span><span class="token function">findOne</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>Вот пример использования <code>ParseUUIDPipe</code> для разбора строкового параметра и проверки, является ли он UUID.</p> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token decorator"><span class="token at operator">@</span><span class="token function">Get</span></span><span class="token punctuation">(</span><span class="token string">':uuid'</span><span class="token punctuation">)</span>
+<span class="token keyword">async</span> <span class="token function">findOne</span><span class="token punctuation">(</span><span class="token decorator"><span class="token at operator">@</span><span class="token function">Param</span></span><span class="token punctuation">(</span><span class="token string">'uuid'</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">ParseUUIDPipe</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> uuid<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>catsService<span class="token punctuation">.</span><span class="token function">findOne</span><span class="token punctuation">(</span>uuid<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><blockquote><p>При использовании <code>ParseUUIDPipe()</code> вы разбираете UUID версии 3, 4 или 5, если вам требуется только определенная
+версия UUID, вы можете передать версию в опциях pipe.</p></blockquote> <p>Выше мы рассмотрели примеры связывания различных встроенных pipe семейства <code>Parse*</code>. Привязка pipe валидации
+немного отличается; мы обсудим это в следующем разделе.</p> <blockquote><p>Также смотрите <a href="/guide/techniques/validation">Техники валидации</a> для подробных примеров pipe валидации.</p></blockquote> <h2 id="пользовательские-pipes"><a href="#пользовательские-pipes" class="header-anchor">#</a> Пользовательские pipes</h2> <p>Как уже говорилось, вы можете создавать собственные пользовательские pipes. Хотя Nest предоставляет надежные
+встроенные <code>ParseIntPipe</code> и <code>ValidationPipe</code>, давайте построим простые пользовательские версии каждого из них с нуля,
+чтобы увидеть, как создаются пользовательские pipes.</p> <p>Начнем с простого <code>ValidationPipe</code>. Изначально мы попросим его просто принимать входное значение и немедленно
+возвращать то же значение.</p> <div class="filename">validation.pipe.ts</div> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> PipeTransform<span class="token punctuation">,</span> Injectable<span class="token punctuation">,</span> ArgumentMetadata <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@nestjs/common'</span><span class="token punctuation">;</span>
+<span class="token decorator"><span class="token at operator">@</span><span class="token function">Injectable</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">ValidationPipe</span> <span class="token keyword">implements</span> <span class="token class-name">PipeTransform</span> <span class="token punctuation">{</span>
+  <span class="token function">transform</span><span class="token punctuation">(</span>value<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">,</span> metadata<span class="token operator">:</span> ArgumentMetadata<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> value<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><blockquote><p><code>PipeTransform&lt;T, R&gt;</code> - это общий интерфейс, который должен быть реализован любым pipe. Общий интерфейс использует <code>T</code>
+для указания типа входного <code>value</code> и <code>R</code> для указания возвращаемого типа метода <code>transform()</code>.</p></blockquote> <p>Каждый pipe должнен реализовать метод <code>transform()</code> для выполнения контракта интерфейса <code>PipeTransform</code>. Этот метод
+имеет два параметра:</p> <ul><li><code>value</code></li> <li><code>metadata</code></li></ul> <p>Параметр <code>value</code> - это текущий обрабатываемый аргумент метода (до его получения методом обработки маршрута),
+а <code>metadata</code> - это метаданные текущего обрабатываемого аргумента метода. Объект метаданных имеет следующие свойства:</p> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">ArgumentMetadata</span> <span class="token punctuation">{</span>
+  type<span class="token operator">:</span> <span class="token string">'body'</span> <span class="token operator">|</span> <span class="token string">'query'</span> <span class="token operator">|</span> <span class="token string">'param'</span> <span class="token operator">|</span> <span class="token string">'custom'</span><span class="token punctuation">;</span>
+  metatype<span class="token operator">?</span><span class="token operator">:</span> Type<span class="token operator">&lt;</span><span class="token builtin">unknown</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+  data<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>Эти свойства описывают текущий обрабатываемый аргумент.</p> <table><tr><td><code>type</code></td> <td>Указывает, является ли аргумент телом запроса
+      <code>@Body()</code>, get параметром
+      <code>@Query()</code>, параметром маршрута
+      <code>@Param()</code>, или пользовательским параметром (read more
+      <a href="/guide/custom-decorators.html">here</a>).
+    </td></tr> <tr><td><code>metatype</code></td> <td>
+      Указывает метатип аргумента, например
+      <code>String</code>. Примечание: значение будет равно
+      <code>undefined</code> если вы либо опустите объявление типа в сигнатуре метода обработчика маршрута, либо используете ванильный JavaScript.
+    </td></tr> <tr><td><code>data</code></td> <td>Строка, передаваемая декоратору, например
+      <code>@Body('string')</code>. Значение будет равно
+      <code>undefined</code> если оставить скобки декоратора пустыми.
+    </td></tr></table> <blockquote><p>Интерфейсы TypeScript исчезают при транспиляции. Таким образом, если тип параметра метода объявлен как интерфейс,
+а не как класс, значение <code>metatype</code> будет <code>Object</code>.</p></blockquote> <h2 id="валидация-на-основе-схемы"><a href="#валидация-на-основе-схемы" class="header-anchor">#</a> Валидация на основе схемы</h2> <p>Давайте сделаем наш pipe валидации немного более полезным. Рассмотрим подробнее метод <code>create()</code> контроллера
+<code>CatsController</code>, где мы хотим убедиться что объект post body является валидным, прежде
+чем пытаться запустить наш метод сервиса <code>CatsService</code>.</p> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token decorator"><span class="token at operator">@</span><span class="token function">Post</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">async</span> <span class="token function">create</span><span class="token punctuation">(</span><span class="token decorator"><span class="token at operator">@</span><span class="token function">Body</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> createCatDto<span class="token operator">:</span> CreateCatDto<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>catsService<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>createCatDto<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>Давайте сосредоточимся на параметре body <code>createCatDto</code>. Его тип - <code>CreateCatDto</code>:</p> <div class="filename">create-cat.dto.ts</div> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">CreateCatDto</span> <span class="token punctuation">{</span>
+  name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+  age<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+  breed<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>Мы хотим убедиться, что любой входящий запрос к методу create содержит валидный body. Поэтому мы должны проверить
+три параметра объекта <code>createCatDto</code>. Мы могли бы сделать это внутри метода обработчика маршрута, но такой подход не идеален,
+поскольку он нарушит <strong>правило одной ответственности</strong> (single responsibility rule - SRP).</p> <p>Другой подход может заключаться в создании класса <strong>validator</strong> и делегировании задачи туда. Это так же не идеально, т.к.
+нам придется помнить о вызове этого валидатора в начале каждого метода.</p> <p>Как насчет создания middleware для валидации? Это может сработать, но, к сожалению,
+невозможно создать <strong>общий middleware</strong>, который можно использовать во всех контекстах всего приложения.
+Это происходит потому, что middleware не знает о <strong>контексте выполнения</strong>, включая обработчик, который будет
+вызван, и любые его параметры.</p> <p>Это, конечно, именно тот случай использования, для которого предназначены pipes. Итак, давайте продолжим и доработаем
+наш pipe валидации.</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/guide/exception-filters.html" class="prev">
+        Фильтры исключений
+      </a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.907b85a3.js" defer></script><script src="/assets/js/2.6ffe1b8d.js" defer></script><script src="/assets/js/17.1c714d4c.js" defer></script>
+  </body>
+</html>
