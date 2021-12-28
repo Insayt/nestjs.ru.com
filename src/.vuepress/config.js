@@ -92,7 +92,7 @@ module.exports = {
       "@mr-hope/sitemap",
       {
         changefreq: "always",
-        hostname: "nestjs.ru.com",
+        hostname: "https://nestjs.ru.com",
       },
     ],
   ],
