@@ -172,28 +172,74 @@ export interface ArgumentMetadata {
     <td>
       <code>type</code>
     </td>
-    <td>Indicates whether the argument is a body
-      <code>@Body()</code>, query
-      <code>@Query()</code>, param
-      <code>@Param()</code>, or a custom parameter (read more
-      <a routerLink="/custom-decorators">here</a>).</td>
+    <td>Указывает, является ли аргумент телом запроса
+      <code>@Body()</code>, get параметром
+      <code>@Query()</code>, параметром маршрута
+      <code>@Param()</code>, или пользовательским параметром (read more
+      <a href="/guide/custom-decorators.html">here</a>).
+    </td>
   </tr>
   <tr>
     <td>
       <code>metatype</code>
     </td>
     <td>
-      Provides the metatype of the argument, for example,
-      <code>String</code>. Note: the value is
-      <code>undefined</code> if you either omit a type declaration in the route handler method signature, or use vanilla JavaScript.
+      Указывает метатип аргумента, например
+      <code>String</code>. Примечание: значение будет равно
+      <code>undefined</code> если вы либо опустите объявление типа в сигнатуре метода обработчика маршрута, либо используете ванильный JavaScript.
     </td>
   </tr>
   <tr>
     <td>
       <code>data</code>
     </td>
-    <td>The string passed to the decorator, for example
-      <code>@Body('string')</code>. It's
-      <code>undefined</code> if you leave the decorator parenthesis empty.</td>
+    <td>Строка, передаваемая декоратору, например
+      <code>@Body('string')</code>. Значение будет равно
+      <code>undefined</code> если оставить скобки декоратора пустыми.
+    </td>
   </tr>
 </table>
+
+> Интерфейсы TypeScript исчезают при транспиляции. Таким образом, если тип параметра метода объявлен как интерфейс, 
+> а не как класс, значение `metatype` будет `Object`.
+
+## Валидация на основе схемы
+
+Давайте сделаем наш pipe валидации немного более полезным. Рассмотрим подробнее метод `create()` контроллера 
+`CatsController`, где мы хотим убедиться что объект post body является валидным, прежде 
+чем пытаться запустить наш метод сервиса `CatsService`.
+
+```typescript
+@Post()
+async create(@Body() createCatDto: CreateCatDto) {
+  this.catsService.create(createCatDto);
+}
+```
+
+Давайте сосредоточимся на параметре body `createCatDto`. Его тип - `CreateCatDto`:
+
+<div class="filename">create-cat.dto.ts</div>
+
+```typescript
+export class CreateCatDto {
+  name: string;
+  age: number;
+  breed: string;
+}
+```
+
+Мы хотим убедиться, что любой входящий запрос к методу create содержит валидный body. Поэтому мы должны проверить 
+три параметра объекта `createCatDto`. Мы могли бы сделать это внутри метода обработчика маршрута, но такой подход не идеален, 
+поскольку он нарушит **правило одной ответственности** (single responsibility rule - SRP).
+
+Другой подход может заключаться в создании класса **validator** и делегировании задачи туда. Это так же не идеально, т.к. 
+нам придется помнить о вызове этого валидатора в начале каждого метода.
+
+Как насчет создания middleware для валидации? Это может сработать, но, к сожалению, 
+невозможно создать **общий middleware**, который можно использовать во всех контекстах всего приложения. 
+Это происходит потому, что middleware не знает о **контексте выполнения**, включая обработчик, который будет 
+вызван, и любые его параметры.
+
+Это, конечно, именно тот случай использования, для которого предназначены pipes. Итак, давайте продолжим и доработаем 
+наш pipe валидации.
+
