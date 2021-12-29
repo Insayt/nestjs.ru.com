@@ -21,6 +21,19 @@ module.exports = {
       "meta",
       { name: "apple-mobile-web-app-status-bar-style", content: "black" },
     ],
+    [
+      "script",
+      {},
+      `(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(87021734, "init", {
+        clickmap:false,
+        trackLinks:false,
+        accurateTrackBounce:true
+   });`,
+    ],
   ],
 
   /**
@@ -95,11 +108,11 @@ module.exports = {
         hostname: "https://nestjs.ru.com",
       },
     ],
-    [
-      "metrika",
-      {
-        counter: "87021734",
-      },
-    ],
+    // [
+    //   "metrika",
+    //   {
+    //     counter: "87021734",
+    //   },
+    // ],
   ],
 };
