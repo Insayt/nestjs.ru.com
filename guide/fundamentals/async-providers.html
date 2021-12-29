@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Асинхронные провайдеры | NestJS</title>
+    <meta name="generator" content="VuePress 1.9.1">
+    <script>(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(87021734, "init", {
+        clickmap:false,
+        trackLinks:false,
+        accurateTrackBounce:true
+   });</script>
+    <meta name="description" content="Nest js русская документация | Nest js документация на русском">
+    <meta name="theme-color" content="#3eaf7c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+    <link rel="preload" href="/assets/css/0.styles.3d05f6df.css" as="style"><link rel="preload" href="/assets/js/app.cb24ec9f.js" as="script"><link rel="preload" href="/assets/js/2.6ffe1b8d.js" as="script"><link rel="preload" href="/assets/js/15.f408c145.js" as="script"><link rel="prefetch" href="/assets/js/10.0726f48d.js"><link rel="prefetch" href="/assets/js/11.ba640f3d.js"><link rel="prefetch" href="/assets/js/12.4379d3c3.js"><link rel="prefetch" href="/assets/js/13.0e564983.js"><link rel="prefetch" href="/assets/js/14.286130f6.js"><link rel="prefetch" href="/assets/js/16.cb64b63b.js"><link rel="prefetch" href="/assets/js/17.d56eea7c.js"><link rel="prefetch" href="/assets/js/18.bbe8ded2.js"><link rel="prefetch" href="/assets/js/19.8d9bd70a.js"><link rel="prefetch" href="/assets/js/20.51728526.js"><link rel="prefetch" href="/assets/js/21.34ffd24c.js"><link rel="prefetch" href="/assets/js/22.08940657.js"><link rel="prefetch" href="/assets/js/23.da7758e4.js"><link rel="prefetch" href="/assets/js/24.581acebe.js"><link rel="prefetch" href="/assets/js/25.d53838c3.js"><link rel="prefetch" href="/assets/js/26.ed6d7e92.js"><link rel="prefetch" href="/assets/js/3.76a04e4c.js"><link rel="prefetch" href="/assets/js/4.b6c6d50c.js"><link rel="prefetch" href="/assets/js/5.af6ee897.js"><link rel="prefetch" href="/assets/js/6.2ad59a3b.js"><link rel="prefetch" href="/assets/js/7.5a6a118a.js"><link rel="prefetch" href="/assets/js/8.0d621cf8.js"><link rel="prefetch" href="/assets/js/9.91b56dc7.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.3d05f6df.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.svg" alt="NestJS" class="logo"> <span class="site-name can-hide">NestJS</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="https://github.com/Insayt/nestjs.ru.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="https://github.com/Insayt/nestjs.ru.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/guide/introduction.html" class="sidebar-link">Введение</a></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Обзор</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/guide/first-steps.html" class="sidebar-link">Первые шаги</a></li><li><a href="/guide/controllers.html" class="sidebar-link">Контроллеры</a></li><li><a href="/guide/providers.html" class="sidebar-link">Провайдеры</a></li><li><a href="/guide/modules.html" class="sidebar-link">Модули</a></li><li><a href="/guide/middleware.html" class="sidebar-link">Middleware</a></li><li><a href="/guide/exception-filters.html" class="sidebar-link">Фильтры исключений</a></li><li><a href="/guide/pipes.html" class="sidebar-link">Pipes</a></li><li><a href="/guide/guards.html" class="sidebar-link">Guards</a></li><li><a href="/guide/interceptors.html" class="sidebar-link">Interceptors</a></li><li><a href="/guide/custom-decorators.html" class="sidebar-link">Пользовательские декораторы</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Основы</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/guide/fundamentals/custom-providers.html" class="sidebar-link">Пользовательские провайдеры</a></li><li><a href="/guide/fundamentals/async-providers.html" aria-current="page" class="active sidebar-link">Асинхронные провайдеры</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/guide/fundamentals/async-providers.html#внедрение" class="sidebar-link">Внедрение</a></li><li class="sidebar-sub-header"><a href="/guide/fundamentals/async-providers.html#пример" class="sidebar-link">Пример</a></li></ul></li><li><a href="/guide/fundamentals/dynamic-modules.html" class="sidebar-link">Динамические модули</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="асинхронные-проваидеры"><a href="#асинхронные-проваидеры" class="header-anchor">#</a> Асинхронные провайдеры</h1> <p>Иногда запуск приложения должен быть отложен до завершения одной или нескольких <strong>асинхронных задач</strong>. Например,
+вы можете не начинать принимать запросы, пока не будет установлено соединение с базой данных. Этого можно добиться с помощью
+асинхронных провайдеров.</p> <p>Синтаксис для этого заключается в использовании <code>async/await</code> с синтаксисом <code>useFactory</code>. Фабрика возвращает <code>Promise</code>,
+а функция фабрики использует <code>await</code> асинхронных задач. Nest будет ожидать разрешения промиса перед инстанцированием любого
+класса, который зависит от такого провайдера.</p> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token punctuation">{</span>
+  provide<span class="token operator">:</span> <span class="token string">'ASYNC_CONNECTION'</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">useFactory</span><span class="token operator">:</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> connection <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">createConnection</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> connection<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+</code></pre></div><blockquote><p>Подробнее о синтаксисе пользовательских провайдеров <a href="/guide/fundamentals/custom-providers">здесь</a>.</p></blockquote> <h2 id="внедрение"><a href="#внедрение" class="header-anchor">#</a> Внедрение</h2> <p>Асинхронные провайдеры инжектируются в другие компоненты с помощью своих маркеров, как и любой другой провайдер.
+В примере выше вы бы использовали конструкцию <code>@Inject('ASYNC_CONNECTION')</code>.</p> <h2 id="пример"><a href="#пример" class="header-anchor">#</a> Пример</h2> <p><a href="/guide/recipes/sql-typeorm">В рецепте TypeORM</a> есть более содержательный пример асинхронного провайдера.</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/guide/fundamentals/custom-providers.html" class="prev">
+        Пользовательские провайдеры
+      </a></span> <span class="next"><a href="/guide/fundamentals/dynamic-modules.html">
+        Динамические модули
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.cb24ec9f.js" defer></script><script src="/assets/js/2.6ffe1b8d.js" defer></script><script src="/assets/js/15.f408c145.js" defer></script>
+  </body>
+</html>
