@@ -92,7 +92,12 @@ module.exports = {
           ],
           ["/guide/fundamentals/async-providers", "Асинхронные провайдеры"],
           ["/guide/fundamentals/dynamic-modules", "Динамические модули"],
+          [
+            "/guide/fundamentals/injection-scopes",
+            "Области применения инъекций",
+          ],
           ["/guide/fundamentals/circular-dependency", "Круговая зависимость"],
+          ["/guide/fundamentals/module-ref", "Ссылка на модуль"],
         ],
       },
     ],
