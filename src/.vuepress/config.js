@@ -92,6 +92,7 @@ module.exports = {
           ],
           ["/guide/fundamentals/async-providers", "Асинхронные провайдеры"],
           ["/guide/fundamentals/dynamic-modules", "Динамические модули"],
+          ["/guide/fundamentals/circular-dependency", "Круговая зависимость"],
         ],
       },
     ],
