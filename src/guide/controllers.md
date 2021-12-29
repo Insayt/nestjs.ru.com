@@ -1,3 +1,9 @@
+---
+meta:
+- name: description
+  content: Controllers Nest JS документация
+---
+
 # Контроллеры
 
 Контроллеры отвечают за обработку входящих **запросов (Request)** и возврат **ответов (Response)** клиенту.

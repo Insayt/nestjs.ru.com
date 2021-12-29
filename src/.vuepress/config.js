@@ -91,6 +91,7 @@ module.exports = {
             "Пользовательские провайдеры",
           ],
           ["/guide/fundamentals/async-providers", "Асинхронные провайдеры"],
+          ["/guide/fundamentals/dynamic-modules", "Динамические модули"],
         ],
       },
     ],
