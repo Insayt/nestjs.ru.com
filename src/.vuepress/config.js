@@ -90,6 +90,7 @@ module.exports = {
             "/guide/fundamentals/custom-providers",
             "Пользовательские провайдеры",
           ],
+          ["/guide/fundamentals/async-providers", "Асинхронные провайдеры"],
         ],
       },
     ],
