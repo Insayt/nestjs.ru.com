@@ -105,6 +105,11 @@ module.exports = {
           ],
           ["/guide/fundamentals/execution-context", "Контекст выполнения"],
           ["/guide/fundamentals/lifecycle-events", "События жизненного цикла"],
+          [
+            "/guide/fundamentals/platform-agnosticism",
+            "Независимость от платформы",
+          ],
+          ["/guide/fundamentals/unit-testing", "Тестирование"],
         ],
       },
     ],
