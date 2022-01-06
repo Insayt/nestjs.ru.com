@@ -104,6 +104,7 @@ module.exports = {
             "Ленивая загрузка модулей",
           ],
           ["/guide/fundamentals/execution-context", "Контекст выполнения"],
+          ["/guide/fundamentals/lifecycle-events", "События жизненного цикла"],
         ],
       },
     ],
