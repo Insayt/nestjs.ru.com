@@ -64,6 +64,7 @@ module.exports = {
         link: "https://github.com/Insayt/nestjs.ru.com",
       },
     ],
+    sidebarDepth: 0,
     sidebar: [
       ["/guide/introduction", "Введение"],
       {
@@ -98,6 +99,11 @@ module.exports = {
           ],
           ["/guide/fundamentals/circular-dependency", "Круговая зависимость"],
           ["/guide/fundamentals/module-ref", "Ссылка на модуль"],
+          [
+            "/guide/fundamentals/lazy-loading-modules",
+            "Ленивая загрузка модулей",
+          ],
+          ["/guide/fundamentals/execution-context", "Контекст выполнения"],
         ],
       },
     ],
