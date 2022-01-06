@@ -61,5 +61,6 @@ export default {
 .donut__title {
   font-size: 24px;
   font-weight: bold;
+  line-height: 1.4;
 }
 </style>

@@ -112,6 +112,11 @@ module.exports = {
           ["/guide/fundamentals/unit-testing", "Тестирование"],
         ],
       },
+      {
+        title: "Техники",
+        collapsable: false,
+        children: [["/guide/techniques/database", "Базы данных"]],
+      },
     ],
   },
 
