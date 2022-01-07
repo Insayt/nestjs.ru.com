@@ -119,7 +119,10 @@ module.exports = {
       {
         title: "Техники",
         collapsable: false,
-        children: [["/guide/techniques/database", "Базы данных"]],
+        children: [
+          ["/guide/techniques/database", "Базы данных"],
+          ["/guide/techniques/mongodb", "Монго"],
+        ],
       },
     ],
   },
