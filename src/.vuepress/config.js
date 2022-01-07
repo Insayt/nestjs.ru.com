@@ -60,6 +60,10 @@ module.exports = {
       //   link: "/config/",
       // },
       {
+        text: "Купить переводчику пивка 🍺",
+        link: "https://donatty.com/insayt",
+      },
+      {
         text: "Github",
         link: "https://github.com/Insayt/nestjs.ru.com",
       },
