@@ -193,11 +193,11 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
 Давайте рассмотрим параметры метода `catch()`. Параметр `exception` - это объект исключения, который обрабатывается 
 в данный момент. Параметр `host` - это объект `ArgumentsHost`. `ArgumentsHost` - это мощный полезный объект, который 
-мы рассмотрим далее в главе [Контекст выполнения](/guide/fundamentals/execution-context)\*. В данном примере кода мы 
+мы рассмотрим далее в главе [Контекст выполнения](/guide/fundamentals/execution-context). В данном примере кода мы 
 используем его для получения ссылки на объекты `Request` и `Response`, которые передаются оригинальному обработчику 
 запроса (в контроллере, где возникло исключение).
 
-\*Причина такого уровня абстракции заключается в том, что `ArgumentsHost` функционирует во всех контекстах 
+Причина такого уровня абстракции заключается в том, что `ArgumentsHost` функционирует во всех контекстах 
 (например, в контексте HTTP-сервера, с которым мы сейчас работаем, а также микросервисов и WebSockets). 
 В главе о контексте выполнения мы увидим, как с помощью `ArgumentsHost` и его вспомогательных функций можно 
 получить доступ к соответствующим [базовым аргументам](/fundamentals/execution-context#host-methods) для любого контекста выполнения.
@@ -221,7 +221,7 @@ async create(@Body() createCatDto: CreateCatDto) {
 
 > Декоратор `@UseFilters()` импортируется из пакета `@nestjs/common`.
 
-Здесь мы использовали декоратор `@UseFilters()`. Как и декоратор `@Catch()`, он может принимать один экземпляр фильтра 
+Здесь мы использовали декоратор `@UseFilters()`, как и `@Catch()`, он может принимать один экземпляр фильтра 
 или список экземпляров фильтра, разделенных запятыми. Здесь мы создали экземпляр `HttpExceptionFilter` на месте. 
 В качестве альтернативы вы можете передать класс (вместо экземпляра), оставив ответственность за инстанцирование 
 фреймворку и включив **инъекцию зависимостей (dependency injection)**.
@@ -240,7 +240,7 @@ async create(@Body() createCatDto: CreateCatDto) {
 > поскольку Nest может легко повторно использовать экземпляры одного и того же класса во всем модуле.
 
 В примере выше фильтр `HttpExceptionFilter` применяется только к единственному обработчику маршрута `create()`. 
-Фильтры исключений могут быть использованы на по-разному: на методах, 
+Фильтры исключений могут быть использованы по-разному: на методах, 
 на контроллерах или глобально. Например, чтобы настроить фильтр на контроллер, 
 вы должны сделать следующее:
 
@@ -320,8 +320,8 @@ import { HttpAdapterHost } from '@nestjs/core';
 export class AllExceptionsFilter implements ExceptionFilter {
   constructor(private readonly httpAdapterHost: HttpAdapterHost) {}
   catch(exception: unknown, host: ArgumentsHost): void {
-    // In certain situations `httpAdapter` might not be available in the
-    // constructor method, thus we should resolve it here.
+    // В определенных ситуациях `httpAdapter` может быть недоступен в
+    // методе конструктора, поэтому мы должны достать его здесь.
     const { httpAdapter } = this.httpAdapterHost;
     const ctx = host.switchToHttp();
     const httpStatus =
