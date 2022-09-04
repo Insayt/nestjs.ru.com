@@ -365,7 +365,7 @@ export class AccountController {
 
 Однако существуют случаи, когда время жизни контроллера только на время запроса может быть нужно, 
 например, кэширование по каждому запросу в GraphQL-приложениях, отслеживание запросов или многопоточность. Узнайте, 
-как управлять scopes [здесь] (/fundamentals/injection-scopes).
+как управлять scopes [здесь](/guide/fundamentals/injection-scopes.html).
 
 ## Асинхронность
 
@@ -440,7 +440,7 @@ async create(@Body() createCatDto: CreateCatDto) {
 > Наш `ValidationPipe` может отфильтровывать свойства, которые не должны быть получены обработчиком метода. 
 > В этом случае мы можем составить белый список допустимых свойств, и любое свойство, не включенное в белый список, 
 > будет автоматически удалено из результирующего объекта. В примере `CreateCatDto`, наш белый список - это 
-> свойства `name`, `age` и `breed`. Подробнее [здесь] (https://docs.nestjs.com/techniques/validation#stripping-properties).
+> свойства `name`, `age` и `breed`. Подробнее [здесь](https://docs.nestjs.com/techniques/validation#stripping-properties).
 
 ## Обработка ошибок
 

@@ -154,7 +154,7 @@ export class CatsModule {
 ```
 
 Однако сами классы модулей не могут быть инжектированы в качестве провайдеров из-за 
-[круговой зависимости] (/fundamentals/circular-dependency).
+[круговой зависимости](/guide/fundamentals/circular-dependency.html).
 
 ## Глобальные модули
 
