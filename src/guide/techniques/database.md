@@ -1386,7 +1386,7 @@ SequelizeModule.forRootAsync({
 
 ## Пример
 
-Рабочий пример доступен [здесь] (https://github.com/nestjs/nest/tree/master/sample/07-sequelize).
+Рабочий пример доступен [здесь](https://github.com/nestjs/nest/tree/master/sample/07-sequelize).
 
 
 
