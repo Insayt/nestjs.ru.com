@@ -1,2 +1,2 @@
 
-Sitemap: https://nestjs.ru.com/sitemap.xml
+Sitemap: https://insayt.github.io/nestjs.ru.com/sitemap.xml
