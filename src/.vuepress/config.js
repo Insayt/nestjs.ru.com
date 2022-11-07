@@ -137,7 +137,7 @@ module.exports = {
       "@mr-hope/sitemap",
       {
         changefreq: "always",
-        hostname: "https://nestjs.ru.com",
+        hostname: "https://insayt.github.io/nestjs.ru.com",
       },
     ],
     // [
