@@ -1,5 +1,7 @@
 # nestjs.ru.com
 
+# Внимание! Документация переехала на github-pages домент тут https://insayt.github.io/nestjs.ru.com/
+
 <img src="https://raw.githubusercontent.com/Insayt/nestjs.ru.com/master/src/.vuepress/public/logo.svg" width="300">
 
 Русская версия документации по фреймворку [Nest JS](https://nestjs.com/)
